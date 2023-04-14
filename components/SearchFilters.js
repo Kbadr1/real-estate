@@ -29,6 +29,7 @@ const SearchFilters = () => {
 
     router.push({ pathname: path, query: query });
   };
+
   return (
     <Box sx={{ backgroundColor: "#F2F6F7" }} pb={3}>
       <Container maxWidth="xl">

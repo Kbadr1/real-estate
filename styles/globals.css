@@ -20,3 +20,11 @@ body{
     border-top-color: #FF5A3C;
     border-left-color: #FF5A3C;
   }
+  .MuiOutlinedInput-notchedOutline {
+    border-width: 1px !important;
+    border-color: pink !important;
+  }
+  
+  .Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: green !important;
+  }

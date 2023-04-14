@@ -35,7 +35,7 @@ const propertyDetails = ({
   };
 
   const [activeImg, setActiveImg] = useState(null);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = (imgId) => {
     setOpen(true);
     setActiveImg(imgId);
