@@ -28,6 +28,7 @@ const Property = ({
               width={400}
               height={300}
               className={propertyStyles.property_image}
+              alt="property"
             />
           </Box>
           <Box p={2}>

@@ -4,7 +4,7 @@ import { baseUrl, fetchApi } from "@/utils/Api";
 import { Box, Container, Grid, Typography, Modal } from "@mui/material";
 import Image from "next/image";
 
-const propertyDetails = ({
+const PropertyDetails = ({
   propertyDetails: {
     price,
     rentFrequency,
@@ -117,10 +117,9 @@ const propertyDetails = ({
             px={2}
             mr={1}
             mb={1}
+            key={amenity.text}
           >
-            <Typography key={amenity.text} color={"orange"}>
-              {amenity.text}
-            </Typography>
+            <Typography color={"orange"}>{amenity.text}</Typography>
           </Box>
         ))
       )}
@@ -169,7 +168,7 @@ const propertyDetails = ({
   );
 };
 
-export default propertyDetails;
+export default PropertyDetails;
 
 export async function getServerSideProps({ params: { id } }) {
   const data = await fetchApi(`${baseUrl}/properties/detail?externalID=${id}`);
