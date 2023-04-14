@@ -3,7 +3,8 @@ import { Container, Typography, Grid, Box } from "@mui/material";
 import Image from "next/image";
 import propertyStyles from "../styles/Property.module.css";
 import DefaultImage from "../public/house.jpg";
-import { Scale } from "@mui/icons-material";
+import Link from "next/link";
+import millify from "millify";
 
 const Property = ({
   property: {
@@ -14,43 +15,42 @@ const Property = ({
     title,
     baths,
     area,
-    agency,
-    isVerified,
     externalID,
-    id,
   },
 }) => {
   return (
     <Grid item xs={12} md={6} lg={4}>
-      <Box className={propertyStyles.property}>
-        <Box p={2}>
-          <Image
-            src={coverPhoto ? coverPhoto.url : DefaultImage}
-            width={400}
-            height={350}
-            className={propertyStyles.property_image}
-          />
+      <Link href={`/property/${externalID}`} passHref>
+        <Box className={propertyStyles.property}>
+          <Box>
+            <Image
+              src={coverPhoto ? coverPhoto.url : DefaultImage}
+              width={400}
+              height={300}
+              className={propertyStyles.property_image}
+            />
+          </Box>
+          <Box p={2}>
+            <Typography
+              whiteSpace={"nowrap"}
+              textOverflow={"ellipsis"}
+              overflow={"hidden"}
+              color={"textPrimary"}
+              fontWeight={"500"}
+              mb={1}
+            >
+              {title}
+            </Typography>
+            <Typography color={"textSecondary"} mb={1}>
+              {rooms} Rooms | {baths} Baths | {Math.trunc(area)} Square Ft
+            </Typography>
+            <Typography fontWeight={"700"} color={"orange"}>
+              AED {millify(price)}
+              {rentFrequency && `/${rentFrequency}`}
+            </Typography>
+          </Box>
         </Box>
-        <Box pl={2} pr={2} pb={2}>
-          <Typography
-            whiteSpace={"nowrap"}
-            textOverflow={"ellipsis"}
-            overflow={"hidden"}
-            color={"textPrimary"}
-            fontWeight={"500"}
-            mb={1}
-          >
-            {title}
-          </Typography>
-          <Typography color={"textPrimary"} mb={1}>
-            {rooms} Rooms | {baths} Baths | {Math.trunc(area)} sqft
-          </Typography>
-          <Typography fontWeight={"700"} color={"textPrimary"}>
-            AED {price}
-            {rentFrequency && `/${rentFrequency}`}
-          </Typography>
-        </Box>
-      </Box>
+      </Link>
     </Grid>
   );
 };

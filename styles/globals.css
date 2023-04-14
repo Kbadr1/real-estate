@@ -4,3 +4,19 @@ body{
   padding: 0;
   margin: 0;
 }
+* {
+  text-decoration: none;
+  outline: none;
+}
+
+#nprogress .bar {
+  background: #FF5A3C !important;
+  }
+  #nprogress .peg {
+    box-shadow: 0 0 10px #FF5A3C, 0 0 5px #FF5A3C;
+  }
+  
+  #nprogress .spinner-icon {
+    border-top-color: #FF5A3C;
+    border-left-color: #FF5A3C;
+  }

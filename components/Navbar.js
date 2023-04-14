@@ -1,18 +1,23 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Button,
+  MenuItem,
+} from "@mui/material";
+
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import Image from "next/image";
 import logo from "../public/logo.svg";
 import navbarStyles from "../styles/Navbar.module.css";
+import Link from "next/link";
 
 const pages = [
   {
@@ -20,16 +25,16 @@ const pages = [
     link: "/",
   },
   {
+    name: "Search",
+    link: "/search",
+  },
+  {
     name: "Buy",
-    link: "/buy",
+    link: "/search?purpose=for-sale",
   },
   {
     name: "Rent",
-    link: "/rent",
-  },
-  {
-    name: "Search",
-    link: "/search",
+    link: "/search?purpose=for-rent",
   },
 ];
 
@@ -44,26 +49,34 @@ const Navbar = () => {
     setAnchorElNav(null);
   };
 
+  const router = useRouter();
+
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#fff" }}>
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "#fff", borderBottom: "2px solid #F2F6F7" }}
+      elevation={0}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              display: { xs: "none", md: "flex" },
-              fontWeight: 700,
-              color: "primaryText",
-              textDecoration: "none",
-              flexGrow: 1,
-            }}
-          >
-            <Image src={logo} className={navbarStyles.logo} />
-            Platinum
-          </Typography>
+          <Link href="/">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{
+                display: { xs: "none", md: "flex" },
+                fontWeight: 700,
+                color: "orange",
+                textDecoration: "none",
+                flexGrow: 1,
+                flex: 1,
+              }}
+            >
+              <Image src={logo} className={navbarStyles.logo} alt="icon" />
+              Platinum
+            </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -96,7 +109,9 @@ const Navbar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page.name}</Typography>
+                  <Link href={`${page.link}`} key={page.name} passHref>
+                    <Typography textAlign="center">{page.name}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -111,27 +126,45 @@ const Navbar = () => {
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontWeight: 700,
-              color: "primaryText",
+              color: "orange",
               textDecoration: "none",
             }}
           >
-            <Image src={logo} className={navbarStyles.logo} />
+            <Image src={logo} className={navbarStyles.logo} alt="icon" />
             Platinum
           </Typography>
           <Box
             sx={{
-              // flexGrow: 1,
+              flexGrow: 1,
               display: { xs: "none", md: "flex" },
+              justifyContent: "flex-end",
             }}
           >
-            {pages.map((page) => (
-              <Button
+            {pages.map((page, index) => (
+              <Link
+                href={`${page.link}`}
                 key={page.name}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "primaryText", display: "block" }}
+                passHref
+                style={{
+                  marginRight: pages.length - 1 > index ? "6px" : "0",
+                }}
               >
-                {page.name}
-              </Button>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    color: "primaryText",
+                    display: "block",
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                      color: "#FF5A3C",
+                      transition: "all 0.3s ease-in-out",
+                    },
+                  }}
+                >
+                  {page.name}
+                </Button>
+              </Link>
             ))}
           </Box>
         </Toolbar>

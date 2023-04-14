@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import heroImage from "../public/hero3.svg";
-import { Container, Grid, Typography, Box } from "@mui/material";
+import { Container, Grid, Typography, Box, Button } from "@mui/material";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import homeStyles from "../styles/Home.module.css";
 
@@ -10,8 +10,8 @@ const Hero = () => {
     <Box
       sx={{
         backgroundColor: "#F2F6F7",
+        padding: { xs: "40px  0", md: " 60px  0", lg: "96px  0" },
       }}
-      py={12}
       mb={12}
     >
       <Container maxWidth="xl">
@@ -21,7 +21,7 @@ const Hero = () => {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
+                alignItems: "flex-start",
                 justifyContent: "center",
                 height: "100%",
               }}
@@ -56,7 +56,10 @@ const Hero = () => {
                   color={"primaryText"}
                   variant="h2"
                   fontWeight={"700"}
-                  mb={4}
+                  mb={2}
+                  sx={{
+                    fontSize: { xs: "28px", md: "40px", lg: "58px", xl: "64" },
+                  }}
                 >
                   Search and find{" "}
                   <Box component={"span"} color={"orange"}>
@@ -65,7 +68,7 @@ const Hero = () => {
                   House
                 </Typography>
 
-                <Typography color={"secondaryText"}>
+                <Typography color={"secondaryText"} mb={2}>
                   Explore from Apartments, builder floors, villas and more
                 </Typography>
               </Box>
